@@ -36,7 +36,7 @@ export const PROFILE = {
   ],
   location: "Bikaner, Rajasthan",
   email: "bhanwarlalkumawat846@gmail.com",
-  phone: "916376736945",
+  phone: "+916376736945",
   whatsapp: "916376736945",
   github: "https://github.com/kumawatvishu",
   linkedin: "https://www.linkedin.com/in/bhanwar-lal-878b08375/",
