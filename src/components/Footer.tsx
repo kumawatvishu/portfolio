@@ -1,6 +1,6 @@
-// src/components/Footer.tsx
 import { PROFILE } from "@/utils/data";
-import { FaWhatsapp, FaPhoneAlt, FaInstagram } from "react-icons/fa";
+import Link from "next/link";
+import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -9,31 +9,18 @@ export default function Footer() {
         © {new Date().getFullYear()} {PROFILE.name} • All Rights Reserved
       </p>
 
-      {/* Contact Links */}
-      {/* WhatsApp */}
-      <a
+      <Link
         href={`https://wa.me/${PROFILE.whatsapp}`}
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-green-500"
       >
         <FaWhatsapp />
-      </a>
+      </Link>
 
-      {/* Call */}
-      <a href={`tel:${PROFILE.phone}`} className="hover:text-blue-500">
+      <Link href={`tel:${PROFILE.phone}`} className="hover:text-blue-500">
         <FaPhoneAlt />
-      </a>
-
-      {/* Instagram */}
-      {/* <a
-          href={PROFILE.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-pink-500"
-        >
-          <FaInstagram />
-        </a> */}
+      </Link>
     </footer>
   );
 }

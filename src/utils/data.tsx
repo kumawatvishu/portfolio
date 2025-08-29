@@ -5,13 +5,11 @@ import {
   FaNodeJs,
   FaCss3Alt,
   FaHtml5,
-  FaGitAlt,
   FaGithub,
 } from "react-icons/fa";
 import { RiJavascriptFill } from "react-icons/ri";
 import {
   SiNextdotjs,
-  SiTypescript,
   SiTailwindcss,
   SiMongodb,
   SiPrisma,
@@ -20,6 +18,8 @@ import {
   SiAdobephotoshop,
 } from "react-icons/si";
 import { VscVscodeInsiders } from "react-icons/vsc";
+import { Experience, Filter, Project } from "@/types";
+
 type Skill = {
   name: string;
   icon: ReactNode;
@@ -70,7 +70,7 @@ export const SKILLS = {
   ],
 };
 
-export const PROJECTS = [
+export const PROJECTS: Project[] = [
   {
     title: "HeroUI Blocks",
     description:
@@ -100,7 +100,7 @@ export const PROJECTS = [
       "TypeScript",
       "Express.js",
       "React Hook Form",
-      "React Tostfy",
+      "React Toastify",
       "CSS",
       "Bootstrap",
     ],
@@ -128,7 +128,6 @@ export const PROJECTS = [
     code: "https://github.com/kumawatvishu/multi-admin-example-backend",
     image: "/assets/multi-admin-backend.png",
   },
-
   {
     title: "Multiblog Admin Example",
     description:
@@ -149,7 +148,6 @@ export const PROJECTS = [
     code: "https://github.com/kumawatvishu/multiblog-admin-example",
     image: "/assets/multiblog-admin.png",
   },
-
   {
     title: "OTT Starter Kit",
     description:
@@ -193,7 +191,6 @@ export const PROJECTS = [
     code: "https://github.com/kumawatvishu/school-kit",
     image: "/assets/school-kit.jpg",
   },
-  ,
   {
     title: "School Management System",
     description:
@@ -210,13 +207,13 @@ export const PROJECTS = [
       "Reactstrap",
       "React Organizational Chart",
     ],
-    demo: "/assets.school-Management.mp4",
+    demo: "/assets/school-management.mp4",
     code: "https://github.com/kumawatvishu/iwebSchoolManagementSysterm",
     image: "/assets/iweb.png",
   },
 ];
 
-export const EXPERIENCE = [
+export const EXPERIENCE: Experience[] = [
   {
     company: "G-Axon Tech Pvt. Ltd.",
     role: "Mern Stack Developer",
@@ -251,7 +248,7 @@ export const EXPERIENCE = [
   },
 ];
 
-export const FILTERS = [
+export const FILTERS: Filter[] = [
   "All",
   "React",
   "Next.js",

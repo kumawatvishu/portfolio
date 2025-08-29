@@ -3,11 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 import { FILTERS, PROJECTS } from "@/utils/data";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
+import { Project, Filter } from "@/types";
 
 export default function Projects() {
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState<string>("All");
-  const [selected, setSelected] = useState<any | null>(null);
+  const [search, setSearch] = useState<string>("");
+  const [filter, setFilter] = useState<Filter>("All");
+  const [selected, setSelected] = useState<Project | null>(null);
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
@@ -24,13 +25,14 @@ export default function Projects() {
   }, []);
 
   const filtered = useMemo(() => {
+    const t = search.toLowerCase();
     return PROJECTS.filter((p) => {
-      const t = search.toLowerCase();
       const matchesSearch =
-        p?.title.toLowerCase().includes(t) ||
-        p?.description.toLowerCase().includes(t) ||
-        p?.tech.some((x) => x.toLowerCase().includes(t));
-      const matchesFilter = filter === "All" || p?.tech.includes(filter);
+        p.title.toLowerCase().includes(t) ||
+        p.description.toLowerCase().includes(t) ||
+        p.tech.some((x) => x.toLowerCase().includes(t));
+
+      const matchesFilter = filter === "All" || p.tech.includes(filter);
       return matchesSearch && matchesFilter;
     });
   }, [search, filter]);
@@ -58,22 +60,21 @@ export default function Projects() {
             key={f}
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
-          ${
-            filter === f
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
-          }`}
+              ${
+                filter === f
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
+              }`}
           >
             {f}
           </button>
         ))}
       </div>
 
-      {/* Grid */}
       <div className="grid max-w-6xl gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((project) => (
           <ProjectCard
-            key={project?.title}
+            key={project.title}
             project={project}
             dark={dark}
             onOpen={() => setSelected(project)}

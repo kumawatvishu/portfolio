@@ -1,11 +1,11 @@
-// src/components/FloatingEmail.tsx
 import { PROFILE } from "@/utils/data";
+import Link from "next/link";
 import { FaEnvelope } from "react-icons/fa";
 
 export default function FloatingEmail() {
   return (
     <div className="fixed z-50 flex flex-col gap-3 bottom-6 right-6">
-      <a
+      <Link
         href={`https://mail.google.com/mail/?view=cm&fs=1&to=${PROFILE.email}`}
         target="_blank"
         rel="noopener noreferrer"
@@ -13,7 +13,7 @@ export default function FloatingEmail() {
         aria-label="Email me"
       >
         <FaEnvelope />
-      </a>
+      </Link>
     </div>
   );
 }

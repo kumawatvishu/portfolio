@@ -8,9 +8,9 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import Image from "next/image";
-import { useState } from "react";
 import Navbar from "./Navbar";
 import { BsEye } from "react-icons/bs";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -20,7 +20,7 @@ export default function Header() {
       <div className="flex flex-col items-center max-w-6xl gap-10 mx-auto md:flex-row justify-evenly py-14 pt-28">
         <div className="font-nunito flex flex-col w-[55%] md:w-1/2 items-center ">
           <h1 className="m-5 text-3xl font-extrabold font-nunito dark:text-white">
-            Hey folks, I'm {PROFILE.role}
+            Hey folks, I&apos;m {PROFILE.role}
           </h1>
 
           <div className="mt-2 text-center dark:text-white">
@@ -36,15 +36,15 @@ export default function Header() {
           </div>
 
           <div className="flex justify-center gap-4 mt-6">
-            <a
+            <Link
               href={PROFILE.resumeUrl}
               download
               className="flex items-center p-2 text-white bg-gray-900 border-gray-600 rounded-md dark:bg-white dark:text-black dark:hover:bg-orange-500 hover:bg-orange-500 border-3"
             >
               <FaDownload className="mr-2" /> Download Resume
-            </a>
+            </Link>
 
-            <a
+            <Link
               href={PROFILE.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -52,7 +52,7 @@ export default function Header() {
             >
               <BsEye className="mr-2" />
               Preview Resume
-            </a>
+            </Link>
           </div>
 
           <div className="flex justify-center gap-4 mt-4 text-2xl text-gray-800 dark:text-gray-200">

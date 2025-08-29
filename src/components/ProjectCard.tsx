@@ -1,5 +1,6 @@
-// src/components/ProjectCard.tsx
+import { Project } from "@/types";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 const cardHover = {
@@ -16,7 +17,7 @@ export default function ProjectCard({
   dark,
   onOpen,
 }: {
-  project: any;
+  project: Project;
   dark: boolean;
   onOpen: () => void;
 }) {
@@ -88,14 +89,14 @@ export default function ProjectCard({
         </div>
         <div className="flex gap-3">
           {project.code && (
-            <a
+            <Link
               href={project.code}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-sm text-blue-600 hover:underline"
             >
               <FaGithub /> Code
-            </a>
+            </Link>
           )}
           {project.demo && (
             <button

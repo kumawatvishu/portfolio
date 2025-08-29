@@ -1,7 +1,8 @@
-// src/components/ProjectModal.tsx
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { Project } from "@/types";
 
 export default function ProjectModal({
   project,
@@ -9,7 +10,7 @@ export default function ProjectModal({
   onClose,
   dark,
 }: {
-  project: any | null;
+  project: Project | null;
   open: boolean;
   onClose: () => void;
   dark: boolean;
@@ -107,14 +108,14 @@ export default function ProjectModal({
 
             <div className="flex gap-4 mt-6">
               {project.code && (
-                <a
+                <Link
                   href={project.code}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-blue-600 hover:underline"
                 >
                   <FaGithub /> Code
-                </a>
+                </Link>
               )}
             </div>
           </motion.div>

@@ -5,9 +5,7 @@ import { useEffect, useRef } from "react";
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  // Actual mouse position
   const mouse = useRef({ x: 0, y: 0 });
-  // Smoothed cursor position
   const cursor = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -19,7 +17,6 @@ export default function CustomCursor() {
     window.addEventListener("mousemove", moveMouse);
 
     const animate = () => {
-      // Linear interpolation (lerp) for smooth movement
       cursor.current.x += (mouse.current.x - cursor.current.x) * 0.2;
       cursor.current.y += (mouse.current.y - cursor.current.y) * 0.2;
 
