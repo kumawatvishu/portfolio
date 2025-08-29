@@ -76,7 +76,7 @@ export const PROJECTS: Project[] = [
     description:
       "A Next.js 15 + React 18 template showcasing pre-built UI blocks using HeroUI, TailwindCSS, and Framer Motion. Includes form validation with React Hook Form & Zod, theme support, Google Maps integration, and ready-to-use components for modern web apps.",
     tech: [
-      "Next.js 15",
+      "Next.js",
       "React 18",
       "HeroUI",
       "TailwindCSS",

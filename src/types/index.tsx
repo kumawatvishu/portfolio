@@ -42,6 +42,7 @@ export type Filter =
   | "React"
   | "Next.js"
   | "Node.js"
+  | "Expressjs"
   | "MongoDB"
   | "Tailwind"
   | "Full Stack";
