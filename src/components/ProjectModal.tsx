@@ -11,7 +11,7 @@ export default function ProjectModal({
   onClose,
   dark,
 }: {
-  project: Project;
+  project: Project | null;
   open: boolean;
   onClose: () => void;
   dark: boolean;
