@@ -17,6 +17,10 @@ export default function Contact() {
           action="https://formspree.io/f/mrbagwkp"
           method="POST"
           className="space-y-4"
+          onSubmit={(e) => {
+            const form = e.currentTarget;
+            setTimeout(() => form.reset(), 100);
+          }}
         >
           <div className="flex gap-2">
             <input
