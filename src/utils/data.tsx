@@ -41,7 +41,7 @@ export const PROFILE = {
   github: "https://github.com/kumawatvishu",
   linkedin: "https://www.linkedin.com/in/bhanwar-lal-878b08375/",
   resumeUrl: "/assets/Resume.pdf",
-  avatar: "/assets/profile.pdf",
+  avatar: "/assets/profile.jpeg",
 };
 
 export const SKILLS = {
