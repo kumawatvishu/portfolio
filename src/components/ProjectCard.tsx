@@ -1,5 +1,6 @@
 import { Project } from "@/types";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
@@ -50,10 +51,12 @@ export default function ProjectCard({
         </svg>
       </button>
 
-      <img
+      <Image
         src={project.image}
         alt={project.title}
         className="object-cover w-full h-48"
+        width={500}
+        height={500}
       />
 
       <div className="p-4">

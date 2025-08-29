@@ -3,6 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Project } from "@/types";
+import Image from "next/image";
 
 export default function ProjectModal({
   project,
@@ -10,7 +11,7 @@ export default function ProjectModal({
   onClose,
   dark,
 }: {
-  project: Project | null;
+  project: Project;
   open: boolean;
   onClose: () => void;
   dark: boolean;
@@ -21,8 +22,7 @@ export default function ProjectModal({
     const video = videoRef.current;
     if (!video) return;
 
-    const audioCtx = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const source = audioCtx.createMediaElementSource(video);
     const gainNode = audioCtx.createGain();
     gainNode.gain.value = 0;
@@ -77,10 +77,12 @@ export default function ProjectModal({
                     playsInline
                   />
                 ) : (
-                  <img
+                  <Image
                     src={project.demo}
                     alt={project.title}
                     className="object-contain w-full max-h-[50vh] mb-4 rounded-lg"
+                    width={500}
+                    height={500}
                   />
                 )}
               </div>
