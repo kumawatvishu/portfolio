@@ -40,8 +40,8 @@ export const PROFILE = {
   whatsapp: "916376736945",
   github: "https://github.com/kumawatvishu",
   linkedin: "https://www.linkedin.com/in/bhanwar-lal-878b08375/",
-  resumeUrl: "/assets/Resume.jpg",
-  avatar: "/assets/profile.jpeg",
+  resumeUrl: "/assets/Resume.pdf",
+  avatar: "/assets/profile.pdf",
 };
 
 export const SKILLS = {
