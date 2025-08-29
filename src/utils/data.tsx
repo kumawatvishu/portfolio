@@ -207,9 +207,9 @@ export const PROJECTS: Project[] = [
       "Reactstrap",
       "React Organizational Chart",
     ],
-    demo: "/assets/school-management.mp4",
+    demo: "/assets/school-Management.mp4",
     code: "https://github.com/kumawatvishu/iwebSchoolManagementSysterm",
-    image: "/assets/iweb.png",
+    image: "/assets/iWeb.png",
   },
 ];
 
