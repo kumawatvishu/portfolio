@@ -8,6 +8,8 @@ import Link from "next/link";
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("Home");
+
   const links = [
     "Home",
     "About",
@@ -17,6 +19,7 @@ export default function Navbar() {
     "Contact",
   ];
 
+  // Theme load
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
@@ -25,6 +28,26 @@ export default function Navbar() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+  }, []);
+
+  // Active link by scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      let current = "Home";
+      links.forEach((link) => {
+        const section = document.getElementById(link);
+        if (section) {
+          const sectionTop = section.offsetTop - 80; // navbar height
+          if (window.scrollY >= sectionTop) {
+            current = link;
+          }
+        }
+      });
+      setActiveLink(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -52,12 +75,15 @@ export default function Navbar() {
         />
       </Link>
 
+      {/* Desktop Menu */}
       <ul className="hidden space-x-6 md:flex">
         {links.map((link) => (
           <li key={link} className="inline-block m-2.5">
             <Link
               href={`#${link}`}
-              className="uppercase text-[#adadad] font-semibold text-[18px] hover:text-[#E78610] hover:cursor-pointer font-sans"
+              className={`uppercase font-semibold text-[18px] font-sans hover:text-[#E78610] ${
+                activeLink === link ? "text-[#E78610]" : "text-[#adadad]"
+              }`}
             >
               {link}
             </Link>
@@ -80,13 +106,18 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {menuOpen && (
         <ul className="absolute left-0 flex flex-col w-full p-6 space-y-4 top-16 bg-gray-50 dark:bg-gray-900 md:hidden">
           {links.map((link) => (
             <li key={link}>
               <Link
                 href={`#${link}`}
-                className="font-semibold text-gray-600 dark:text-gray-200 hover:text-orange-500"
+                className={`font-semibold hover:text-orange-500 ${
+                  activeLink === link
+                    ? "text-orange-500"
+                    : "text-gray-600 dark:text-gray-200"
+                }`}
                 onClick={() => setMenuOpen(false)}
               >
                 {link}
