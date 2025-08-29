@@ -46,8 +46,6 @@ export default function Header() {
 
             <Link
               href="/assets/Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center p-2 text-white bg-gray-700 border-gray-600 rounded-md dark:bg-white dark:text-black dark:hover:bg-orange-500 hover:bg-orange-500 border-3"
             >
               <BsEye className="mr-2" />
