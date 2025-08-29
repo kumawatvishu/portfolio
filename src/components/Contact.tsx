@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { PROFILE } from "@/utils/data"; // Ensure this path matches your project structure
+import { PROFILE } from "@/utils/data";
 import Link from "next/link";
 
 export default function Contact() {
