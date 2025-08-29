@@ -83,7 +83,6 @@ export const PROJECTS: Project[] = [
       "Framer Motion",
       "React Hook Form",
       "Zod",
-      "Tailwind",
       "React Icons",
       "Swiper",
       "Google Maps API",
@@ -137,7 +136,6 @@ export const PROJECTS: Project[] = [
       "React",
       "Vite",
       "TypeScript",
-      "TailwindCSS",
       "Radix UI",
       "Lucide React",
       "React Router",
@@ -257,7 +255,6 @@ export const FILTERS: Filter[] = [
   "Node.js",
   "MongoDB",
   "Tailwind",
-  "Full Stack",
 ];
 
 export const cardHover = {

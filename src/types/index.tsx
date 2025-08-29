@@ -44,8 +44,7 @@ export type Filter =
   | "Node.js"
   | "Expressjs"
   | "MongoDB"
-  | "Tailwind"
-  | "Full Stack";
+  | "Tailwind";
 
 export interface CardHover {
   rest: {
