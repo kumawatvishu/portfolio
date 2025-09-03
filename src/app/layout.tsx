@@ -10,8 +10,12 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Bhanwar Kumawat Portfolio",
-  description: "Personal portfolio website",
+  title: "Bhanwar Lal Kumawat - MERN Stack Developer",
+  description:
+    "MERN Stack Developer specializing in Next.js, React, Node.js and scalable web apps.",
+  other: {
+    "google-site-verification": "lc6djjnA7d7S2AJWOQb3YBI7eQ-Mt3-DsLklBXUE66M",
+  },
 };
 
 export default function RootLayout({
@@ -22,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="XYZ123abc..." />
+        <meta
+          name="google-site-verification"
+          content="lc6djjnA7d7S2AJWOQb3YBI7eQ-Mt3-DsLklBXUE66M"
+        />
       </head>
       <body className={`${roboto.variable}  antialiased`}>
         <CustomCursor />
