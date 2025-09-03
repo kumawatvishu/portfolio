@@ -4,6 +4,7 @@ import { FILTERS, PROJECTS } from "@/utils/data";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import { Project, Filter } from "@/types";
+import { motion } from "framer-motion";
 
 export default function Projects() {
   const [search, setSearch] = useState<string>("");
@@ -37,6 +38,33 @@ export default function Projects() {
     });
   }, [search, filter]);
 
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { x: -50, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  };
+
+  const inputVariants = {
+    hidden: { y: -30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" as const },
+    },
+  };
+
   return (
     <section
       id="Projects"
@@ -44,7 +72,14 @@ export default function Projects() {
     >
       <h2 className="mb-6 text-2xl font-bold text-center">Projects</h2>
 
-      <div className="max-w-lg mx-auto mb-6">
+      {/* Search Input Animation */}
+      <motion.div
+        className="max-w-lg mx-auto mb-6"
+        variants={inputVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <input
           type="text"
           placeholder="Search projects..."
@@ -52,12 +87,20 @@ export default function Projects() {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100"
         />
-      </div>
+      </motion.div>
 
-      <div className="flex flex-wrap justify-center gap-3 mb-8">
+      {/* Filter Buttons Animation */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-3 mb-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {FILTERS.map((f) => (
-          <button
+          <motion.button
             key={f}
+            variants={itemVariants}
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
               ${
@@ -67,20 +110,28 @@ export default function Projects() {
               }`}
           >
             {f}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
-      <div className="grid max-w-6xl gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3">
+      {/* Project Cards Animation */}
+      <motion.div
+        className="grid max-w-6xl gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {filtered.map((project) => (
-          <ProjectCard
-            key={project.title}
-            project={project}
-            dark={dark}
-            onOpen={() => setSelected(project)}
-          />
+          <motion.div key={project.title} variants={itemVariants}>
+            <ProjectCard
+              project={project}
+              dark={dark}
+              onOpen={() => setSelected(project)}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <ProjectModal
         project={selected}

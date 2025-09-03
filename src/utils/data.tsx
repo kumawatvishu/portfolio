@@ -227,16 +227,6 @@ export const EXPERIENCE: Experience[] = [
     ],
   },
   {
-    company: "Freelance",
-    role: "Mern Stack Developer",
-    period: "2025",
-    bullets: [
-      "Developed pixel-perfect landing pages & dashboards.",
-      "Boosted performance (95+ Lighthouse scores).",
-      "Delivered clean, maintainable TypeScript/JavaScript code.",
-    ],
-  },
-  {
     company: "iWebwiser Pvt. Ltd",
     role: "Frontend Developer",
     period: "July 2025 – August 2025",

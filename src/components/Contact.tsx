@@ -1,27 +1,68 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { PROFILE } from "@/utils/data";
 import Link from "next/link";
 
 export default function Contact() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariantsLeft: Variants = {
+    hidden: { opacity: 0, x: -50 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { type: "spring" as const, stiffness: 50, duration: 0.5 },
+    },
+  };
+
+  const itemVariantsRight: Variants = {
+    hidden: { opacity: 0, x: 50 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { type: "spring" as const, stiffness: 50, duration: 0.5 },
+    },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      initial="hidden"
+      animate="show"
+      variants={containerVariants}
       className="max-w-full dark:bg-gray-700 dark:text-white"
     >
       <section
         id="Contact"
         className="max-w-5xl px-6 py-16 mx-auto dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200"
       >
-        <h2 className="mb-10 text-3xl font-bold text-center">Get in Touch</h2>
-        <p className="mb-12 text-center text-gray-600 dark:text-gray-300">
+        <motion.h2
+          variants={itemVariantsLeft}
+          className="mb-10 text-3xl font-bold text-center"
+        >
+          Get in Touch
+        </motion.h2>
+
+        <motion.p
+          variants={itemVariantsRight}
+          className="mb-12 text-center text-gray-600 dark:text-gray-300"
+        >
           Have a project in mind or just want to say hello? Feel free to reach
           out using the form below.
-        </p>
+        </motion.p>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="p-6 space-y-4 border rounded-lg dark:border-gray-600">
+          {/* Left Side - Contact Info */}
+          <motion.div
+            variants={itemVariantsLeft}
+            className="p-6 space-y-4 border rounded-lg dark:border-gray-600"
+          >
             <h3 className="text-xl font-semibold">Contact Information</h3>
             <p>Here’s how you can reach me directly.</p>
             <div>
@@ -57,9 +98,11 @@ export default function Contact() {
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <form
+          {/* Right Side - Contact Form */}
+          <motion.form
+            variants={itemVariantsRight}
             action="https://formspree.io/f/mrbagwkp"
             method="POST"
             className="p-6 space-y-4 border rounded-lg dark:border-gray-600"
@@ -103,7 +146,7 @@ export default function Contact() {
             >
               Send Message
             </button>
-          </form>
+          </motion.form>
         </div>
       </section>
     </motion.div>
