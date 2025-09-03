@@ -8,7 +8,6 @@ export default function CustomCursorWrapper() {
 
   useEffect(() => {
     const checkPointer = () => {
-      // केवल mouse devices के लिए enable करें
       const isMouseDevice = window.matchMedia("(pointer: fine)").matches;
       setShowCursor(isMouseDevice);
     };

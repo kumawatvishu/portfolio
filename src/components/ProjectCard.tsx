@@ -50,7 +50,7 @@ export default function ProjectCard({
       viewport={{ once: true }}
       className={`relative overflow-hidden shadow rounded-xl bg-gray-200 dark:bg-gray-700 dark:text-gray-50`}
     >
-      {/* Top Button Animation */}
+      {/* Top Button */}
       <motion.button
         variants={buttonVariants}
         initial="hidden"
@@ -76,6 +76,7 @@ export default function ProjectCard({
         </svg>
       </motion.button>
 
+      {/* Image */}
       <Image
         src={project.image}
         alt={project.title}
@@ -84,38 +85,46 @@ export default function ProjectCard({
         height={500}
       />
 
-      <div className="p-4">
-        <h3 className="text-lg font-bold dark:text-white">{project.title}</h3>
-        <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
-          {project.description}
-        </p>
-        <div className="flex flex-wrap gap-2 mb-3">
-          {project.tech.slice(0, 4).map((t: string, i: number) => (
-            <span
-              key={i}
-              className={`px-3 py-1 text-sm rounded-full ${
-                dark
-                  ? "bg-gray-700 text-gray-100 hover:bg-gray-900"
-                  : "bg-gray-100 text-gray-900 hover:bg-gray-400"
-              }`}
-            >
-              {t}
-            </span>
-          ))}
+      {/* Card Content */}
+      <div className="p-4 flex flex-col justify-between h-[200px]  lg:h-[200px]">
+        <div>
+          <h3 className="text-lg font-bold dark:text-white">{project.title}</h3>
+          <p className="mb-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+            {project.description}
+          </p>
 
-          {project.tech.length > 4 && (
-            <span
-              className={`px-3 py-1 text-sm rounded-full ${
-                dark
-                  ? "bg-gray-700 text-gray-100 hover:bg-gray-900"
-                  : "bg-gray-100 text-gray-900 hover:bg-gray-400"
-              }`}
-            >
-              +{project.tech.length - 4}
-            </span>
-          )}
+          {/* Tech Tags */}
+          <div className="flex gap-2 mb-3">
+            {project.tech.slice(0, 3).map((t: string, i: number) => (
+              <span
+                key={i}
+                className={`px-3 py-1 text-sm rounded-full ${
+                  dark
+                    ? "bg-gray-700 text-gray-100 hover:bg-gray-900"
+                    : "bg-gray-100 text-gray-900 hover:bg-gray-400"
+                }`}
+              >
+                {t}
+              </span>
+            ))}
+
+            {project.tech.length > 3 && (
+              <button
+                onClick={onOpen}
+                className={`px-3 py-1 text-sm rounded-full ${
+                  dark
+                    ? "bg-gray-700 text-gray-100 hover:bg-gray-900"
+                    : "bg-gray-100 text-gray-900 hover:bg-gray-400"
+                }`}
+              >
+                +{project.tech.length - 3}
+              </button>
+            )}
+          </div>
         </div>
-        <div className="flex gap-3">
+
+        {/* Links */}
+        <div className="flex gap-3 ">
           {project.code && (
             <Link
               href={project.code}
