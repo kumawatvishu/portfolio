@@ -14,16 +14,16 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header id="Home" className="dark:bg-gray-900 ">
+    <header id="Home" className="dark:bg-gray-900">
       <Navbar />
 
-      <div className="flex flex-col items-center max-w-6xl gap-10 mx-auto md:flex-row justify-evenly py-14 pt-28">
-        <div className="font-nunito flex flex-col w-[55%] md:w-1/2 items-center ">
-          <h1 className="m-5 text-3xl font-extrabold font-nunito dark:text-white">
+      <div className="flex flex-col items-center max-w-6xl gap-8 px-4 py-10 pt-24 mx-auto sm:gap-10 md:flex-row justify-evenly sm:pt-28 sm:px-6">
+        <div className="font-nunito flex flex-col w-[90%] sm:w-[70%] md:w-1/2 items-center md:items-start text-center md:text-left">
+          <h1 className="m-3 text-2xl font-extrabold sm:m-5 sm:text-3xl dark:text-white">
             Hey folks, I&apos;m {PROFILE.role}
           </h1>
 
-          <div className="mt-2 text-center dark:text-white">
+          <div className="mt-2 text-sm sm:text-base dark:text-white">
             <Typewriter
               options={{
                 strings: PROFILE.tagline,
@@ -35,25 +35,25 @@ export default function Header() {
             />
           </div>
 
-          <div className="flex justify-center gap-4 mt-6">
+          <div className="flex flex-wrap justify-center gap-3 mt-5 md:justify-start sm:gap-4 sm:mt-6">
             <Link
               href={PROFILE.resumeUrl}
               download
-              className="flex items-center p-2 text-white bg-gray-900 border-gray-600 rounded-md dark:bg-white dark:text-black dark:hover:bg-orange-500 hover:bg-orange-500 border-3"
+              className="flex items-center px-3 py-2 text-sm text-white bg-gray-900 border border-gray-600 rounded-md sm:text-base dark:bg-white dark:text-black dark:hover:bg-orange-500 hover:bg-orange-500"
             >
               <FaDownload className="mr-2" /> Download Resume
             </Link>
 
             <Link
               href="/assets/Resume.pdf"
-              className="flex items-center p-2 text-white bg-gray-700 border-gray-600 rounded-md dark:bg-white dark:text-black dark:hover:bg-orange-500 hover:bg-orange-500 border-3"
+              className="flex items-center px-3 py-2 text-sm text-white bg-gray-700 border border-gray-600 rounded-md sm:text-base dark:bg-white dark:text-black dark:hover:bg-orange-500 hover:bg-orange-500"
             >
               <BsEye className="mr-2" />
               Preview Resume
             </Link>
           </div>
 
-          <div className="flex justify-center gap-4 mt-4 text-2xl text-gray-800 dark:text-gray-200">
+          <div className="flex justify-center gap-4 mt-4 text-xl text-gray-800 md:justify-center sm:text-2xl dark:text-gray-200">
             <a
               href={PROFILE.linkedin}
               target="_blank"
@@ -78,13 +78,14 @@ export default function Header() {
         </div>
 
         {/* Profile Image */}
-        <div className="border-[5px] border-orange-500 w-[329px] h-[392px] flex ">
+        <div className="border-[4px] sm:border-[5px] border-orange-500 w-40 h-48 sm:w-56 sm:h-64 md:w-72 md:h-70 lg:w-80 lg:h-96 flex justify-center items-center mt-6 md:mt-0">
           <Image
             src={PROFILE.avatar}
             alt={PROFILE.name}
-            className="object-cover object-top rounded-md animate-movePfp"
+            className="object-cover object-top w-40 h-48 rounded-md animate-movePfp sm:w-56 sm:h-64 md:w-72 md:h-70 lg:w-80 lg:h-96"
             height={500}
-            width={300}
+            width={400}
+            priority
           />
         </div>
       </div>

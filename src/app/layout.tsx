@@ -1,11 +1,11 @@
-import CustomCursor from "@/components/CustomCursor";
 import { Roboto } from "next/font/google";
 import "../styles/globals.css";
 import { Metadata } from "next";
+import CustomCursorWrapper from "@/components/CustomCursorWrapper";
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["400", "500", "700"], // normal, medium, bold
+  weight: ["400", "500", "700"],
   variable: "--font-roboto",
 });
 
@@ -20,19 +20,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="lc6djjnA7d7S2AJWOQb3YBI7eQ-Mt3-DsLklBXUE66M"
-        />
-      </head>
-      <body className={`${roboto.variable}  antialiased`}>
-        <CustomCursor />
+      <head />
+      <body className={`${roboto.variable} antialiased`}>
+        <CustomCursorWrapper /> {/* Client component only */}
         {children}
       </body>
     </html>

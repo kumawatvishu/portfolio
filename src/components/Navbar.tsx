@@ -20,7 +20,6 @@ export default function Navbar() {
     "Contact",
   ];
 
-  // Theme load
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
@@ -29,7 +28,6 @@ export default function Navbar() {
     }
   }, []);
 
-  // Scroll active link
   useEffect(() => {
     const handleScroll = () => {
       let current = "Home";
@@ -48,7 +46,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -69,26 +66,26 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full flex justify-between items-center h-16 px-4 md:px-8 bg-[#111] dark:bg-gray-900 text-white z-50 shadow-lg">
+    <nav className="fixed top-0 left-0 w-full flex justify-between items-center h-14 sm:h-16 px-3 sm:px-6 bg-[#111] dark:bg-gray-900 text-white z-50 shadow-lg">
       {/* Logo */}
       <Link href="#Home">
         <Image
           src="/assets/logo.png"
           alt="Logo"
-          width={140}
-          height={40}
-          className="cursor-pointer w-[120px] md:w-[150px]"
+          width={120}
+          height={35}
+          className="cursor-pointer w-[100px] sm:w-[140px]"
           priority
         />
       </Link>
 
       {/* Desktop Menu */}
-      <ul className="hidden space-x-6 md:flex">
+      <ul className="hidden space-x-4 sm:space-x-6 md:flex">
         {links.map((link) => (
           <li key={link}>
             <Link
               href={`#${link}`}
-              className={`uppercase font-semibold text-[16px] transition-colors duration-200 hover:text-[#E78610] ${
+              className={`uppercase font-semibold text-[13px] sm:text-[16px] transition-colors duration-200 hover:text-[#E78610] ${
                 activeLink === link ? "text-[#E78610]" : "text-gray-300"
               }`}
             >
@@ -99,15 +96,15 @@ export default function Navbar() {
       </ul>
 
       {/* Theme + Mobile Toggle */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-3 sm:space-x-4">
         <button
           onClick={toggleTheme}
-          className="text-xl text-gray-400 transition-colors duration-200 dark:text-gray-200"
+          className="text-lg text-gray-400 transition-colors duration-200 sm:text-xl dark:text-gray-200"
         >
           {darkMode ? <FaSun /> : <FaMoon />}
         </button>
         <button
-          className="text-2xl text-gray-300 md:hidden dark:text-gray-200"
+          className="text-xl text-gray-300 sm:text-2xl md:hidden dark:text-gray-200"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <FaBars />
@@ -118,14 +115,14 @@ export default function Navbar() {
       {menuOpen && (
         <div
           ref={menuRef}
-          className="absolute transition-all duration-300 ease-in-out rounded-lg shadow-lg right-4 top-16 md:hidden bg-gray-50 dark:bg-gray-900"
+          className="absolute transition-all duration-300 ease-in-out rounded-lg shadow-lg right-3 sm:right-4 top-14 sm:top-16 md:hidden bg-gray-50 dark:bg-gray-900"
         >
-          <ul className="flex flex-col min-w-[160px] px-4 py-3 space-y-3">
+          <ul className="flex flex-col min-w-[140px] sm:min-w-[160px] px-3 sm:px-4 py-2 sm:py-3 space-y-2 sm:space-y-3">
             {links.map((link) => (
               <li key={link}>
                 <Link
                   href={`#${link}`}
-                  className={`block text-base font-medium transition-colors duration-200 ${
+                  className={`block text-sm sm:text-base font-medium transition-colors duration-200 ${
                     activeLink === link
                       ? "text-orange-500"
                       : "text-gray-600 dark:text-gray-200 hover:text-orange-500"

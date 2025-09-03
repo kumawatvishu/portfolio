@@ -12,6 +12,7 @@ export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [dark, setDark] = useState(false);
 
+  // Detect Dark Mode
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setDark(document.documentElement.classList.contains("dark"));
@@ -25,6 +26,7 @@ export default function Projects() {
     return () => observer.disconnect();
   }, []);
 
+  // Filter Projects
   const filtered = useMemo(() => {
     const t = search.toLowerCase();
     return PROJECTS.filter((p) => {
@@ -68,11 +70,13 @@ export default function Projects() {
   return (
     <section
       id="Projects"
-      className="min-h-screen px-6 py-12 text-gray-900 bg-gray-100 dark:bg-gray-800 dark:text-white"
+      className="min-h-screen px-4 py-10 text-gray-900 bg-gray-100 sm:px-6 sm:py-12 dark:bg-gray-800 dark:text-white"
     >
-      <h2 className="mb-6 text-2xl font-bold text-center">Projects</h2>
+      <h2 className="mb-6 text-2xl font-bold text-center sm:text-3xl">
+        Projects
+      </h2>
 
-      {/* Search Input Animation */}
+      {/* Search Input */}
       <motion.div
         className="max-w-lg mx-auto mb-6"
         variants={inputVariants}
@@ -85,13 +89,13 @@ export default function Projects() {
           placeholder="Search projects..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100"
+          className="w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg sm:text-base dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100"
         />
       </motion.div>
 
-      {/* Filter Buttons Animation */}
+      {/* Filter Buttons */}
       <motion.div
-        className="flex flex-wrap justify-center gap-3 mb-8"
+        className="flex flex-wrap justify-center gap-2 mb-6 sm:gap-3 sm:mb-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -102,7 +106,7 @@ export default function Projects() {
             key={f}
             variants={itemVariants}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors
               ${
                 filter === f
                   ? "bg-blue-600 text-white"
@@ -114,9 +118,9 @@ export default function Projects() {
         ))}
       </motion.div>
 
-      {/* Project Cards Animation */}
+      {/* Project Cards */}
       <motion.div
-        className="grid max-w-6xl gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3"
+        className="grid max-w-6xl grid-cols-1 gap-4 mx-auto sm:gap-6 sm:grid-cols-2 lg:grid-cols-3"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

@@ -7,23 +7,22 @@ export default function Skills({
 }: {
   prefersDark?: boolean;
 }) {
+  const [showAll, setShowAll] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect screen size on mount and resize
+  // Detect screen size
   useEffect(() => {
-    const checkScreen = () => setIsMobile(window.innerWidth < 768);
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  const skillVariants = (dark: boolean) => ({
-    hidden: { x: -50, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" as const }, // FIXED
-    },
+  const getSkillHover = (dark: boolean) => ({
     rest: {
       scale: 1,
       backgroundColor: dark ? "#f1f5f9" : "#1f2937",
@@ -33,32 +32,16 @@ export default function Skills({
       scale: 1.1,
       backgroundColor: dark ? "#1f2937" : "#0f172a",
       color: dark ? "#ffffff" : "#f8fafc",
-      transition: { duration: 0.3, ease: "easeOut" as const }, // FIXED
+      transition: { duration: 0.3, ease: "easeOut" as const },
     },
   });
 
   const allSkills = Object.values(SKILLS).flat();
-  const visibleSkills = isMobile ? allSkills.slice(0, 5) : allSkills;
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { x: -50, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+  const visibleSkills = isMobile
+    ? showAll
+      ? allSkills
+      : allSkills.slice(0, 5)
+    : allSkills;
 
   return (
     <section
@@ -68,22 +51,18 @@ export default function Skills({
       <div className="px-6 py-12 mx-auto lg:ml-28 lg:mr-28">
         <h2 className="mb-6 text-2xl font-bold text-center">Skills</h2>
 
-        <motion.div
+        {/* Skills Grid */}
+        <div
           className="
             grid grid-cols-3 gap-3 text-[10px]
             sm:flex sm:flex-wrap sm:justify-center sm:text-base
           "
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
         >
           {visibleSkills.map((skill) => (
             <motion.span
               key={skill.name}
-              variants={skillVariants(prefersDark)}
-              initial="hidden"
-              whileInView="visible"
+              variants={getSkillHover(prefersDark)}
+              initial="rest"
               whileHover="hover"
               animate="rest"
               className="flex items-center gap-2 px-4 py-2 font-medium rounded-full shadow"
@@ -92,7 +71,17 @@ export default function Skills({
               {skill.name}
             </motion.span>
           ))}
-        </motion.div>
+
+          {/* More/Less Button only for mobile */}
+          {isMobile && allSkills.length > 5 && (
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="flex items-center justify-center px-4 py-2 text-white transition bg-blue-600 rounded-full shadow hover:bg-blue-700"
+            >
+              {showAll ? "Less" : "+ More"}
+            </button>
+          )}
+        </div>
       </div>
     </section>
   );
