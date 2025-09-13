@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { FaBars, FaMoon, FaSun, FaX, FaCode } from "react-icons/fa";
+import { FaBars, FaMoon, FaSun, FaTimes, FaCode } from "react-icons/fa";
+
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -249,7 +250,7 @@ export default function Navbar() {
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <FaX />
+                <FaTimes />
               </motion.div>
             ) : (
               <motion.div

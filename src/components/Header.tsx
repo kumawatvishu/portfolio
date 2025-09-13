@@ -1,3 +1,5 @@
+"use client";
+
 import Typewriter from "typewriter-effect";
 import { PROFILE } from "@/utils/data";
 import {
@@ -21,13 +23,27 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function Header() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    // sirf client par chalega
+    const updateSize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    updateSize(); // initial set
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
@@ -36,8 +52,17 @@ export default function Header() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const rotateX = useTransform(mouseY, [0, window.innerHeight], [10, -10]);
-  const rotateY = useTransform(mouseX, [0, window.innerWidth], [-10, 10]);
+  // agar windowSize abhi 0 hai to fallback rakho
+  const rotateX = useTransform(
+    mouseY,
+    [0, windowSize.height || 1],
+    [10, -10]
+  );
+  const rotateY = useTransform(
+    mouseX,
+    [0, windowSize.width || 1],
+    [-10, 10]
+  );
 
   return (
     <header
