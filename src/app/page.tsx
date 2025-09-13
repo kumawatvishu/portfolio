@@ -29,7 +29,7 @@ export default function Page() {
     <FadeIn>
       <Header />
       <About />
-      <Skills prefersDark={darkMode} />
+      <Skills />
       <Projects />
       <Experience />
       <Contact />

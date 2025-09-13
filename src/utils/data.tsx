@@ -162,7 +162,7 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "G-Axon Tech Pvt. Ltd.",
     role: "Mern Stack Developer",
-    period: "Mar 2025  – Present",
+    period: "Mar 2024  – Present",
     location: "Remote",
     tech: ["React", "Node.js", "MongoDB"],
     bullets: [
@@ -174,7 +174,7 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "iWebwiser Pvt. Ltd",
     role: "Frontend Developer",
-    period: "July 2025 – August 2025",
+    period: "July 2023 – August 2023",
     bullets: [
       "Built high-performance landing pages & dashboards with 95+ Lighthouse scores.",
       "Developed and optimized multi-step forms with dynamic validation & smooth navigation.",
