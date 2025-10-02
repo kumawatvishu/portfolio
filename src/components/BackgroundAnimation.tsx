@@ -132,10 +132,7 @@ export default function BackgroundAnimation({
   }, []);
 
   return (
-    <motion.div
-      className="absolute inset-0 z-50" // Increased z-index and removed overflow-hidden for debugging
-      style={{ y: parallaxOffset }}
-    >
+    <motion.div className="absolute inset-0 z-0" style={{ y: parallaxOffset }}>
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{ opacity: 0.1 }} // Force full opacity for debugging

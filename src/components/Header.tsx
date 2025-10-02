@@ -195,15 +195,14 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            <motion.a
+            <a
               href={PROFILE.linkedin}
               target="_blank"
+              rel="noopener noreferrer"
               className="p-3 transition-all duration-300 rounded-full hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              whileHover={{ scale: 1.2, y: -3, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
             >
               <FaLinkedin />
-            </motion.a>
+            </a>
             <motion.a
               href={PROFILE.github}
               target="_blank"
