@@ -1,6 +1,6 @@
 "use client";
 
-import FadeIn from "@/components/FadeIn";
+import dynamic from "next/dynamic";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Experience from "@/components/Experience";
@@ -12,16 +12,20 @@ import ScrollTop from "@/components/ScrollTop";
 import Skills from "@/components/Skills";
 import { useEffect, useState } from "react";
 
+const FadeIn = dynamic(() => import("@/components/FadeIn"), { ssr: false });
+
 export default function Page() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        setDarkMode(true);
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     }
   }, []);
 
