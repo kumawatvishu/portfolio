@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import TechTags from "./TechTags"; // Import the new TechTags component
 
 const cardVariants = {
   hidden: { x: 50, opacity: 0 },
@@ -22,14 +23,7 @@ const buttonVariants = {
   },
 };
 
-const cardHover = {
-  rest: { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)" },
-  hover: {
-    scale: 1.05,
-    boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-    transition: { duration: 0.3, ease: "easeOut" as const },
-  },
-};
+// Removed cardHover as it's now handled directly with motion props
 
 export default function ProjectCard({
   project,
@@ -45,8 +39,8 @@ export default function ProjectCard({
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      whileHover="hover"
-      animate="rest"
+      whileHover={{ scale: 1.05, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
+      whileTap={{ scale: 0.98 }}
       viewport={{ once: true }}
       className={`relative overflow-hidden shadow rounded-xl bg-gray-200 dark:bg-gray-700 dark:text-gray-50`}
     >
@@ -94,33 +88,7 @@ export default function ProjectCard({
           </p>
 
           {/* Tech Tags */}
-          <div className="flex gap-2 mb-3">
-            {project.tech.slice(0, 3).map((t: string, i: number) => (
-              <span
-                key={i}
-                className={`px-3 py-1 text-sm rounded-full ${
-                  dark
-                    ? "bg-gray-700 text-gray-100 hover:bg-gray-900"
-                    : "bg-gray-100 text-gray-900 hover:bg-gray-400"
-                }`}
-              >
-                {t}
-              </span>
-            ))}
-
-            {project.tech.length > 3 && (
-              <button
-                onClick={onOpen}
-                className={`px-3 py-1 text-sm rounded-full ${
-                  dark
-                    ? "bg-gray-700 text-gray-100 hover:bg-gray-900"
-                    : "bg-gray-100 text-gray-900 hover:bg-gray-400"
-                }`}
-              >
-                +{project.tech.length - 3}
-              </button>
-            )}
-          </div>
+          <TechTags tech={project.tech} dark={dark} onShowMore={onOpen} />
         </div>
 
         {/* Links */}

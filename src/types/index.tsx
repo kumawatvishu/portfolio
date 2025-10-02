@@ -15,7 +15,7 @@ export interface Profile {
   whatsapp: string;
   github: string;
   linkedin: string;
-  resumeUrl: string;
+  resume: string;
   avatar: string;
 }
 
@@ -37,31 +37,10 @@ export interface Experience {
   bullets: string[];
 }
 
-export type Filter =
-  | "All"
-  | "React"
-  | "Next.js"
-  | "Node.js"
-  | "Expressjs"
-  | "MongoDB"
-  | "Tailwind";
-
-export interface CardHover {
-  rest: {
-    scale: number;
-    rotate: number;
-    boxShadow: string;
-  };
-  hover: {
-    scale: number;
-    rotate: number;
-    boxShadow: string;
-    transition: {
-      duration: number;
-      ease: "easeOut";
-    };
-  };
-}
+export type Filter = {
+  label: string;
+  value: string;
+};
 
 export interface Skills {
   Frontend: Skill[];

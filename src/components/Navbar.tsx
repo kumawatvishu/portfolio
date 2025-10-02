@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { FaBars, FaMoon, FaSun, FaTimes, FaCode } from "react-icons/fa";
+import { FaBars, FaTimes, FaCode } from "react-icons/fa";
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle"; // Import the new ThemeToggle component
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
+  // Removed darkMode and toggleTheme state/functions as they are now in ThemeToggle
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
@@ -24,11 +25,7 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
+    // Removed theme initialization logic as it's now in ThemeToggle
   }, []);
 
   useEffect(() => {
@@ -40,7 +37,7 @@ export default function Navbar() {
       links.forEach((link) => {
         const section = document.getElementById(link);
         if (section) {
-          const sectionTop = section.offsetTop - 100;
+          const sectionTop = section.offsetTop - 70; // Use the same offset as handleLinkClick
           const sectionBottom = sectionTop + section.offsetHeight;
           if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
             current = link;
@@ -52,7 +49,7 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [links]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -66,18 +63,13 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menuOpen]);
 
-  const toggleTheme = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    document.documentElement.classList.toggle("dark", newMode);
-    localStorage.setItem("theme", newMode ? "dark" : "light");
-  };
+  // Removed toggleTheme as it's now in ThemeToggle
 
   const handleLinkClick = (link: string) => {
     setMenuOpen(false);
     const element = document.getElementById(link);
     if (element) {
-      const offsetTop = element.offsetTop - 80;
+      const offsetTop = element.offsetTop - 70; // Adjusted offset for better scroll alignment
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth",
@@ -97,7 +89,11 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
     >
       {/* Enhanced Logo with Better Design */}
-      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <motion.div
+        whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.3 }}
+      >
         <Link
           href="#Home"
           className="flex items-center"
@@ -110,17 +106,28 @@ export default function Navbar() {
                 <div className="flex items-center space-x-2">
                   {/* Custom Logo Icon - Compact */}
                   <div className="relative">
-                    <div className="w-7 h-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-sm">
-                      <FaCode className="text-white text-sm" />
+                    <div className="flex items-center justify-center rounded-lg shadow-sm w-7 h-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+                      <FaCode className="text-sm text-white" />
                     </div>
                     {/* Small decorative dot */}
                     <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   </div>
                   {/* Logo Text - Compact */}
                   <div className="relative">
-                    <div className="text-base font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    <motion.div
+                      className="text-base font-bold text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text"
+                      animate={{
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      style={{ backgroundSize: "200% 100%" }}
+                    >
                       Bhanwar
-                    </div>
+                    </motion.div>
                     {/* Subtle underline */}
                     <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-50"></div>
                   </div>
@@ -129,7 +136,7 @@ export default function Navbar() {
 
               {/* Animated Border */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 opacity-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl group-hover:opacity-100"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -146,11 +153,11 @@ export default function Navbar() {
 
             {/* Floating Tech Icons - Compact */}
             <motion.div
-              className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 shadow-md"
+              className="absolute flex items-center justify-center w-5 h-5 text-xs text-white rounded-full shadow-md opacity-0 -top-1 -right-1 bg-gradient-to-r from-green-400 to-emerald-500 group-hover:opacity-100"
               animate={{
-                scale: [1, 1.2, 1],
+                scale: [1, 1.3, 1],
                 rotate: [0, 360, 0],
-                y: [0, -1, 0],
+                y: [0, -2, 0],
               }}
               transition={{
                 duration: 2,
@@ -164,14 +171,14 @@ export default function Navbar() {
             {/* Glow Effect */}
             {scrolled && (
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-30 rounded-lg blur-sm -z-10"
+                className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 opacity-30 blur-sm -z-10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.3 }}
                 transition={{ duration: 0.3 }}
               />
             )}
           </div>
-      </Link>
+        </Link>
       </motion.div>
 
       {/* Desktop Menu */}
@@ -183,63 +190,46 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <button
+            <motion.button
               onClick={() => handleLinkClick(link)}
-              className={`relative uppercase font-semibold text-sm lg:text-base transition-all duration-300 hover:text-blue-500 dark:hover:text-blue-400 ${
+              className={`relative uppercase font-semibold text-sm lg:text-base py-2 px-3 rounded-full transition-all duration-300 group hover:scale-105 ${
+                // Added group for hover effects
                 activeLink === link
-                  ? "text-blue-600 dark:text-blue-400"
-                  : "text-gray-700 dark:text-gray-300"
+                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
+                  : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
               }`}
+              // Removed whileHover and whileTap to resolve linter error
             >
               {link}
               {activeLink === link && (
                 <motion.div
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                  className="absolute inset-0 rounded-full -z-10 bg-gradient-to-r from-blue-500 to-purple-500"
                   layoutId="activeTab"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 />
               )}
-            </button>
+              {/* Subtle hover effect for non-active links */}
+              {activeLink !== link && (
+                <motion.span className="absolute inset-0 transition-opacity duration-200 bg-blue-500 rounded-full opacity-0 group-hover:opacity-10" />
+              )}
+            </motion.button>
           </motion.li>
         ))}
       </ul>
 
       {/* Theme Toggle + Mobile Menu Button */}
       <div className="flex items-center space-x-4">
-        {/* Enhanced Dark Mode Toggle */}
-        <motion.button
-          onClick={toggleTheme}
-          className="relative w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <motion.div
-            className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md flex items-center justify-center"
-            animate={{
-              x: darkMode ? 24 : 0,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 500,
-              damping: 30,
-            }}
-          >
-            {darkMode ? (
-              <FaMoon className="text-blue-600 text-xs" />
-            ) : (
-              <FaSun className="text-yellow-500 text-xs" />
-            )}
-          </motion.div>
-        </motion.button>
+        {/* Use the new ThemeToggle component */}
+        <ThemeToggle />
 
         {/* Mobile Menu Button */}
         <motion.button
-          className="text-xl text-gray-700 dark:text-gray-300 md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+          className="p-2 text-2xl text-gray-700 transition-colors duration-200 rounded-lg dark:text-gray-300 md:hidden hover:bg-gray-100 dark:hover:bg-gray-800"
           onClick={() => setMenuOpen(!menuOpen)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <AnimatePresence mode="wait">
             {menuOpen ? (
@@ -248,7 +238,7 @@ export default function Navbar() {
                 initial={{ rotate: -90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               >
                 <FaTimes />
               </motion.div>
@@ -258,9 +248,9 @@ export default function Navbar() {
                 initial={{ rotate: 90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-        >
-          <FaBars />
+                transition={{ duration: 0.3 }}
+              >
+                <FaBars />
               </motion.div>
             )}
           </AnimatePresence>
@@ -269,73 +259,58 @@ export default function Navbar() {
 
       {/* Enhanced Mobile Dropdown */}
       <AnimatePresence>
-      {menuOpen && (
+        {menuOpen && (
           <motion.div
-          ref={menuRef}
-            className="absolute top-full right-4 mt-2 w-64 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 md:hidden overflow-hidden"
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            ref={menuRef}
+            className="absolute w-64 mt-2 overflow-hidden border border-gray-200 top-full right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-xl shadow-3xl dark:border-gray-700 md:hidden"
+            initial={{ opacity: 0, y: -50, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -50, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             <div className="p-4">
               <div className="space-y-2">
                 {links.map((link, index) => (
                   <motion.div
                     key={link}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                      delay: index * 0.05,
+                    }}
                   >
-                    <button
+                    <motion.button
                       onClick={() => handleLinkClick(link)}
-                      className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
-                    activeLink === link
+                      className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 group relative overflow-hidden ${
+                        activeLink === link
                           ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
-                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  }`}
-                >
-                  {link}
-                    </button>
+                          : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                    >
+                      {link}
+                      {activeLink !== link && (
+                        <motion.span className="absolute inset-0 transition-opacity duration-200 bg-blue-500 opacity-0 group-hover:opacity-10" />
+                      )}
+                    </motion.button>
                   </motion.div>
                 ))}
               </div>
 
               {/* Mobile Theme Toggle */}
-              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between px-4">
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Dark Mode
                   </span>
-                  <motion.button
-                    onClick={toggleTheme}
-                    className="relative w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <motion.div
-                      className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-md flex items-center justify-center"
-                      animate={{
-                        x: darkMode ? 20 : 0,
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 30,
-                      }}
-                    >
-                      {darkMode ? (
-                        <FaMoon className="text-blue-600 text-xs" />
-                      ) : (
-                        <FaSun className="text-yellow-500 text-xs" />
-                      )}
-                    </motion.div>
-                  </motion.button>
+                  <ThemeToggle /> {/* Use the new ThemeToggle component */}
                 </div>
               </div>
-        </div>
+            </div>
           </motion.div>
-      )}
+        )}
       </AnimatePresence>
     </motion.nav>
   );

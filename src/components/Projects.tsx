@@ -1,28 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PROJECTS } from "@/utils/data";
+import { PROJECTS, FILTERS } from "@/utils/data"; // Import FILTERS from data.tsx
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import { motion } from "framer-motion";
 import { Project } from "@/types";
 import { FaSearch, FaFilter, FaCode, FaExternalLinkAlt } from "react-icons/fa";
+// Removed individual icon imports as they are now in BackgroundAnimation
+import BackgroundAnimation from "./BackgroundAnimation"; // Import the new component
 
-const FILTERS = [
-  { label: "All", value: "" },
-  { label: "React", value: "React" },
-  { label: "Next.js", value: "Next" },
-  { label: "Node.js", value: "Node" },
-  { label: "MongoDB", value: "MongoDB" },
-  { label: "Tailwind", value: "Tailwind" },
-  { label: "Express", value: "Express" },
-];
+// Removed local FILTERS definition as it's now imported from data.tsx
 
 export default function Projects() {
   const [search, setSearch] = useState<string>("");
   const [filter, setFilter] = useState<string>("");
   const [selected, setSelected] = useState<Project | null>(null);
   const [dark, setDark] = useState(false);
+
+  // Removed vibrantColors as it's now handled by BackgroundAnimation
 
   // Detect Dark Mode
   useEffect(() => {
@@ -52,16 +48,15 @@ export default function Projects() {
   return (
     <section
       id="Projects"
-      className="relative min-h-screen py-20 bg-gradient-to-br from-gray-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden"
+      className="relative min-h-screen py-20 bg-gradient-to-br from-gray-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.02'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm20 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/svg%3E")`
-          }}></div>
-        </div>
-      </div>
+      {/* Use the new BackgroundAnimation component */}
+      <BackgroundAnimation
+        opacity={0.1}
+        iconCount={80}
+        particleCount={30}
+        parallaxMultiplier={0.3}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Header */}
@@ -72,12 +67,26 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          <h2
+            className="mb-3 text-4xl font-extrabold text-transparent md:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text"
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{
+              backgroundSize: "200% 100%",
+            }}
+          >
             Featured Projects
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore my portfolio of MERN stack applications, from full-stack web apps to modern UI components. 
-            Each project showcases different aspects of my development skills.
+          <p className="max-w-3xl px-4 mx-auto text-lg text-gray-600 md:text-xl dark:text-gray-300">
+            Explore my portfolio of MERN stack applications, from full-stack web
+            apps to modern UI components. Each project showcases different
+            aspects of my development skills.
           </p>
         </motion.div>
 
@@ -193,8 +202,10 @@ export default function Projects() {
               💡 Have a Project in Mind?
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              I&apos;m always excited to work on new challenges. Whether it&apos;s a full-stack application, 
-              API development, or modern UI components, let&apos;s discuss how we can bring your vision to life.
+              I&apos;m always excited to work on new challenges. Whether
+              it&apos;s a full-stack application, API development, or modern UI
+              components, let&apos;s discuss how we can bring your vision to
+              life.
             </p>
             <motion.a
               href="#Contact"

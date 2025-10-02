@@ -1,7 +1,6 @@
 import { Roboto } from "next/font/google";
 import "../styles/globals.css";
 import { Metadata } from "next";
-import CustomCursorWrapper from "@/components/CustomCursorWrapper";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -19,15 +18,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children, 
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <head />
-      <body className={`${roboto.variable} antialiased`}>
-        <CustomCursorWrapper /> {/* Client component only */}
+      <body className={`${roboto.variable} antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

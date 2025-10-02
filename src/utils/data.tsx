@@ -18,7 +18,7 @@ import {
   SiAdobephotoshop,
 } from "react-icons/si";
 import { VscVscodeInsiders } from "react-icons/vsc";
-import { Experience, Filter, Project } from "@/types";
+import { Experience, Project } from "@/types";
 
 type Skill = {
   name: string;
@@ -26,21 +26,20 @@ type Skill = {
 };
 
 export const PROFILE = {
-  name: "Bhanwar Kumawat",
-  role: "Mern Stack Developer",
+  name: "Bhanwar lal Kumawat",
+  role: "MERN Stack Developer",
   tagline: [
-    " A JavaScript enthusiast, I craft seamless user experiences and  efficient server-side solutions. Explore my work to see how I can help turn your ideas into powerful, functional web applications.",
-    "Building clean, scalable web apps with React, Next.js & MongoDB.",
-    "Freelance & Full-time Developer",
-    "React • Next.js • Node • MongoDB",
+    "Building seamless user experiences and robust backend solutions.",
+    "Passionate about creating innovative web applications.",
+    "Turning ideas into reality with clean and efficient code.",
   ],
-  location: "Bikaner, Rajasthan",
+  location: "Bikaner, Rajasthan, India",
   email: "bhanwarlalkumawat846@gmail.com",
-  phone: "+916376736945",
-  whatsapp: "916376736945",
-  github: "https://github.com/kumawatvishu",
-  linkedin: "https://www.linkedin.com/in/bhanwar-lal-878b08375/",
-  resumeUrl: "/assets/Resume.pdf",
+  phone: "+91 6376736945",
+  whatsapp: "https://wa.me/916376736945",
+  github: "https://github.com/kumawatvishu/",
+  linkedin: "https://www.linkedin.com/in/bhanwar-lal-kumawat/",
+  resume: "/assets/Resume.pdf", 
   avatar: "/assets/profile.jpeg",
 };
 
@@ -162,7 +161,7 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "G-Axon Tech Pvt. Ltd.",
     role: "Mern Stack Developer",
-    period: "Mar 2024  – Present",
+    period: "Mar 2025  – Jun 2025",
     location: "Remote",
     tech: ["React", "Node.js", "MongoDB"],
     bullets: [
@@ -174,30 +173,33 @@ export const EXPERIENCE: Experience[] = [
   {
     company: "iWebwiser Pvt. Ltd",
     role: "Frontend Developer",
-    period: "July 2023 – August 2023",
+    period: "July 2025 – August 2025",
     bullets: [
       "Built high-performance landing pages & dashboards with 95+ Lighthouse scores.",
       "Developed and optimized multi-step forms with dynamic validation & smooth navigation.",
       "Delivered scalable, maintainable TypeScript/JavaScript code for production use.",
     ],
   },
-];
-
-export const FILTERS: Filter[] = [
-  "All",
-  "React",
-  "Next.js",
-  "Node.js",
-  "MongoDB",
-  "Tailwind",
-];
-
-export const cardHover = {
-  rest: { scale: 1, rotate: 0, boxShadow: "0 0 0 rgba(0,0,0,0)" },
-  hover: {
-    scale: 1.05,
-    rotate: 1,
-    boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-    transition: { duration: 0.3, ease: "easeOut" as const },
+  {
+    company: "Unpod",
+    role: "Frontend Developer",
+    period: "October 2025 – Present",
+    bullets: [
+      "Developing scalable UI features for Unpod’s AI-powered voice & chat automation platform.",
+      "Building reusable React/Next.js components integrated with Ant Design & Tailwind for consistency.",
+      "Collaborating with backend/AI teams to design seamless API integrations & real-time updates.",
+      "Improving performance, accessibility & Lighthouse scores across dashboards and landing pages.",
+      "Contributing to design system & component library for faster development across multiple apps.",
+    ],
   },
-};
+];
+
+export const FILTERS = [
+  { label: "All", value: "" },
+  { label: "React", value: "React" },
+  { label: "Next.js", value: "Next" },
+  { label: "Node.js", value: "Node" },
+  { label: "MongoDB", value: "MongoDB" },
+  { label: "Tailwind", value: "Tailwind" },
+  { label: "Express", value: "Express" },
+];

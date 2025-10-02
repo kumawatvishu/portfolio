@@ -14,10 +14,63 @@ import {
   FaLightbulb,
   FaUsers,
   FaChartLine,
+  FaJs,
+  FaNodeJs,
+  FaGitAlt,
+  FaHtml5,
+  FaCss3Alt,
+  FaNpm,
+  FaDocker,
+  FaLinux,
+  FaTerminal,
+  FaDownload,
+  FaCheckCircle,
+  FaMobileAlt,
+  FaShieldAlt,
+  FaPalette,
+  FaExchangeAlt,
 } from "react-icons/fa";
+import {
+  SiMongodb,
+  SiExpress,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { useScroll, useTransform } from "framer-motion";
+import BackgroundAnimation from "./BackgroundAnimation"; // Import the new component
 
 export default function About() {
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
+  // Removed useScroll and parallaxOffset as they will be handled by BackgroundAnimation
+
+  const [text] = useTypewriter({
+    words: ["About Me"],
+    loop: 1,
+    typeSpeed: 70,
+    delaySpeed: 1000,
+  });
+
+  // Define a palette of vibrant, tech-themed colors
+  const vibrantColors = [
+    "text-blue-500",
+    "text-purple-500",
+    "text-green-500",
+    "text-red-500",
+    "text-indigo-500",
+    "text-yellow-500",
+    "text-teal-500",
+    "text-pink-500",
+    "dark:text-blue-300",
+    "dark:text-purple-300",
+    "dark:text-green-300",
+    "dark:text-red-300",
+    "dark:text-indigo-300",
+    "dark:text-yellow-300",
+    "dark:text-teal-300",
+    "dark:text-pink-300",
+  ];
 
   // Parent container variants for stagger animation
   const textContainer: Variants = {
@@ -35,6 +88,9 @@ export default function About() {
       y: 0,
       opacity: 1,
       transition: {
+        type: "spring", // Changed to spring for a bouncy effect
+        damping: 10, // Adjust damping for more or less bounce
+        stiffness: 100, // Adjust stiffness for speed
         duration: 0.5,
         ease: "easeOut",
       },
@@ -44,45 +100,12 @@ export default function About() {
   return (
     <section
       id="About"
-      className="relative py-16 md:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden"
+      className="relative py-16 md:py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          ></div>
-        </div>
-
-        {/* Floating Tech Icons */}
-        <motion.div
-          className="absolute top-10 right-10 text-blue-300 opacity-20"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        >
-          <FaReact size={30} />
-        </motion.div>
-        <motion.div
-          className="absolute bottom-20 left-10 text-green-300 opacity-20"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        >
-          <FaServer size={25} />
-        </motion.div>
-        <motion.div
-          className="absolute top-1/2 right-20 text-purple-300 opacity-20"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        >
-          <FaDatabase size={35} />
-        </motion.div>
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BackgroundAnimation opacity={0.1} parallaxMultiplier={0.3} />{" "}
+      {/* Use the new component */}
+      {/* Removed Tailwind CSS hack for dynamic color classes as it's now in BackgroundAnimation */}
+      <div className="relative z-10 max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center">
           {/* Small Profile Photo */}
           <motion.div
@@ -94,20 +117,20 @@ export default function About() {
           >
             <div className="relative">
               <motion.div
-                className="relative rounded-full shadow-2xl overflow-hidden border-4 border-white dark:border-gray-700"
+                className="relative overflow-hidden border-4 border-white rounded-full shadow-2xl dark:border-gray-700"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
                 <Image
                   src={PROFILE.avatar}
                   alt="about"
-                  className="w-32 h-32 sm:w-40 sm:h-40 object-cover object-top"
+                  className="object-cover object-top w-32 h-32 sm:w-40 sm:h-40"
                   width={160}
                   height={160}
                 />
                 {/* Glowing Effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-full border-4 border-blue-500 opacity-0"
+                  className="absolute inset-0 border-4 border-blue-500 rounded-full opacity-0"
                   animate={{
                     opacity: [0, 0.3, 0],
                     scale: [1, 1.02, 1],
@@ -122,7 +145,7 @@ export default function About() {
 
               {/* Small Floating Badge */}
               <motion.div
-                className="absolute -top-2 -right-2 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg"
+                className="absolute px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-full shadow-lg -top-2 -right-2"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -139,7 +162,7 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 border border-gray-200 dark:border-gray-700 relative overflow-hidden">
+            <div className="relative p-6 overflow-hidden border border-gray-200 shadow-xl bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm rounded-2xl md:p-8 dark:border-gray-700">
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-5">
                 {[...Array(15)].map((_, i) => (
@@ -165,9 +188,21 @@ export default function About() {
 
               <motion.h1
                 variants={textItem}
-                className="mb-6 text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent relative z-10"
+                className="relative z-10 mb-6 text-3xl font-extrabold text-transparent md:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% 100%",
+                }}
               >
-                About Me
+                {text}
+                <Cursor />
               </motion.h1>
 
               {/* About Content */}
@@ -176,13 +211,13 @@ export default function About() {
                 className="relative z-10 space-y-6"
               >
                 <motion.p
-                  className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-100"
+                  className="text-base leading-relaxed text-gray-700 md:text-lg dark:text-gray-100"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
                   Hello, I&apos;m{" "}
-                  <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  <span className="font-semibold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
                     {PROFILE.name}
                   </span>
                   , a passionate MERN stack developer with expertise in building
@@ -192,7 +227,7 @@ export default function About() {
                 </motion.p>
 
                 <motion.p
-                  className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-100"
+                  className="text-base leading-relaxed text-gray-700 md:text-lg dark:text-gray-100"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
@@ -205,7 +240,7 @@ export default function About() {
                 </motion.p>
 
                 {/* MERN Stack Highlights */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div className="grid grid-cols-2 gap-4 mt-8 md:grid-cols-4">
                   {[
                     {
                       icon: <FaReact />,
@@ -267,28 +302,53 @@ export default function About() {
 
                 {/* Key Strengths */}
                 <div className="mt-8">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                  <h3 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">
                     What I Bring to the Table:
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {[
-                      "🚀 Full-stack development with MERN stack",
-                      "⚡ Performance optimization & SEO",
-                      "📱 Responsive & mobile-first design",
-                      "🔒 Secure authentication & data handling",
-                      "🎨 Modern UI/UX with Tailwind CSS",
-                      "🔄 RESTful APIs & database design",
+                      {
+                        icon: <FaRocket />,
+                        text: "Full-stack development with MERN stack",
+                      },
+                      {
+                        icon: <FaChartLine />,
+                        text: "Performance optimization & SEO",
+                      },
+                      {
+                        icon: <FaMobileAlt />,
+                        text: "Responsive & mobile-first design",
+                      },
+                      {
+                        icon: <FaShieldAlt />,
+                        text: "Secure authentication & data handling",
+                      },
+                      {
+                        icon: <FaPalette />,
+                        text: "Modern UI/UX with Tailwind CSS",
+                      },
+                      {
+                        icon: <FaExchangeAlt />,
+                        text: "RESTful APIs & database design",
+                      },
                     ].map((strength, index) => (
                       <motion.div
                         key={index}
-                        className="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-300"
+                        className="flex items-center p-3 text-sm text-gray-600 transition-colors duration-300 rounded-lg md:text-base dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         viewport={{ once: true }}
                         whileHover={{ x: 5 }}
                       >
-                        <span className="mr-3">{strength}</span>
+                        <span
+                          className={`mr-3 text-lg ${
+                            vibrantColors[index % vibrantColors.length]
+                          }`}
+                        >
+                          {strength.icon}
+                        </span>
+                        <span>{strength.text}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -298,11 +358,11 @@ export default function About() {
               {/* Call to Action Buttons */}
               <motion.div
                 variants={textItem}
-                className="flex flex-col sm:flex-row justify-center gap-4 mt-8 relative z-10"
+                className="relative z-10 flex flex-col justify-center gap-4 mt-8 sm:flex-row"
               >
                 <motion.a
-                  href="/#Contact"
-                  className="flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  href="#Contact"
+                  className="flex items-center justify-center px-6 py-3 text-base font-semibold text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -312,12 +372,31 @@ export default function About() {
                 </motion.a>
                 <motion.a
                   href="#Projects"
-                  className="flex items-center justify-center px-6 py-3 text-base font-semibold text-blue-600 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-400 dark:hover:text-white"
+                  className="flex items-center justify-center px-6 py-3 text-base font-semibold text-blue-600 transition-all duration-300 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:text-white dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-400 dark:hover:text-white"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <FaCode className="mr-2" />
                   View My Work
+                </motion.a>
+                {/* Download Resume Button */}
+                <motion.a
+                  href={PROFILE.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center px-6 py-3 text-base font-semibold text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-teal-500 to-green-500 hover:from-teal-600 hover:to-green-600 hover:shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaDownload className="mr-2" />
+                  Download Resume
+                  <motion.span
+                    className="ml-2 text-xs"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  >
+                    <FaArrowRight />
+                  </motion.span>
                 </motion.a>
               </motion.div>
             </div>
