@@ -58,16 +58,16 @@ export default function Projects() {
         parallaxMultiplier={0.3}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
+      <div className="relative z-10 px-4 mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
-          className="text-center mb-12"
+          className="mb-12 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2
+          <motion.h2
             className="mb-3 text-4xl font-extrabold text-transparent md:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text"
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -82,7 +82,7 @@ export default function Projects() {
             }}
           >
             Featured Projects
-          </h2>
+          </motion.h2>
           <p className="max-w-3xl px-4 mx-auto text-lg text-gray-600 md:text-xl dark:text-gray-300">
             Explore my portfolio of MERN stack applications, from full-stack web
             apps to modern UI components. Each project showcases different
@@ -99,16 +99,16 @@ export default function Projects() {
           viewport={{ once: true }}
         >
           {/* Search Bar */}
-          <div className="max-w-md mx-auto relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaSearch className="h-5 w-5 text-gray-400" />
+          <div className="relative max-w-md mx-auto">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <FaSearch className="w-5 h-5 text-gray-400" />
             </div>
             <input
               type="text"
               placeholder="Search projects..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              className="w-full py-3 pl-10 pr-4 text-gray-900 placeholder-gray-500 transition-all duration-300 bg-white border border-gray-300 dark:border-gray-600 rounded-xl dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
@@ -135,7 +135,7 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -161,17 +161,17 @@ export default function Projects() {
         {/* No Results Message */}
         {filtered.length === 0 && (
           <motion.div
-            className="text-center py-12"
+            className="py-12 text-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 max-w-md mx-auto">
-              <FaCode className="text-4xl text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+            <div className="max-w-md p-8 mx-auto bg-white border border-gray-200 shadow-lg dark:bg-gray-800 rounded-2xl dark:border-gray-700">
+              <FaCode className="mx-auto mb-4 text-4xl text-gray-400" />
+              <h3 className="mb-2 text-lg font-semibold text-gray-800 dark:text-white">
                 No projects found
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
+              <p className="mb-4 text-gray-600 dark:text-gray-300">
                 Try adjusting your search or filter criteria.
               </p>
               <motion.button
@@ -179,7 +179,7 @@ export default function Projects() {
                   setSearch("");
                   setFilter("");
                 }}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                className="px-6 py-2 text-white transition-colors duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -197,11 +197,11 @@ export default function Projects() {
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+          <div className="p-8 border border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl dark:border-blue-800">
+            <h3 className="mb-3 text-xl font-semibold text-gray-800 dark:text-white">
               💡 Have a Project in Mind?
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+            <p className="max-w-2xl mx-auto mb-6 text-gray-600 dark:text-gray-300">
               I&apos;m always excited to work on new challenges. Whether
               it&apos;s a full-stack application, API development, or modern UI
               components, let&apos;s discuss how we can bring your vision to
@@ -209,7 +209,7 @@ export default function Projects() {
             </p>
             <motion.a
               href="#Contact"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 py-3 font-semibold text-white transition-all duration-300 rounded-full shadow-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
