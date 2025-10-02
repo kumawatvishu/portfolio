@@ -41,6 +41,7 @@ export const PROFILE = {
   linkedin: "https://www.linkedin.com/in/bhanwar-lal-kumawat/",
   resume: "/assets/Resume.pdf", 
   avatar: "/assets/profile.jpeg",
+  
 };
 
 export const SKILLS = {
