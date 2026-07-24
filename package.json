@@ -1,14 +1,16 @@
 {
-  "name": "portfolio",
+  "name": "portfolio-bhanwar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "framer-motion": "^12.23.12",
     "next": "15.5.2",
     "react": "19.1.0",

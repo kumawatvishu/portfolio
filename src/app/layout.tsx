@@ -1,20 +1,31 @@
-import { Roboto } from "next/font/google";
-import "../styles/globals.css";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import BackgroundFx from "@/components/BackgroundFx";
+import { PROFILE } from "@/lib/data";
+import "./globals.css";
 
-const roboto = Roboto({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-roboto",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Bhanwar Lal Kumawat - MERN Stack Developer",
-  description:
-    "MERN Stack Developer specializing in Next.js, React, Node.js and scalable web apps.",
-  other: {
-    "google-site-verification": "lc6djjnA7d7S2AJWOQb3YBI7eQ-Mt3-DsLklBXUE66M",
-  },
+  title: `${PROFILE.name} — Frontend Engineer, Real-Time AI Systems`,
+  description: PROFILE.tagline.join(" · "),
 };
 
 export default function RootLayout({
@@ -23,10 +34,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head />
-      <body className={`${roboto.variable} antialiased overflow-x-hidden`}>
-        {children}
+    <html lang="en" className={`scroll-smooth ${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body>
+        <BackgroundFx />
+        <Navbar />
+        <main className="page-shell">{children}</main>
       </body>
     </html>
   );
